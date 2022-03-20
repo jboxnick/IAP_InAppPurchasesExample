@@ -9,21 +9,31 @@
 /* Begin PBXBuildFile section */
 		B934F9B127E69DC90004A916 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934F9B027E69DC90004A916 /* AppDelegate.swift */; };
 		B934F9B327E69DC90004A916 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934F9B227E69DC90004A916 /* SceneDelegate.swift */; };
-		B934F9B527E69DC90004A916 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934F9B427E69DC90004A916 /* ViewController.swift */; };
 		B934F9B827E69DC90004A916 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B934F9B627E69DC90004A916 /* Main.storyboard */; };
 		B934F9BA27E69DCA0004A916 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B934F9B927E69DCA0004A916 /* Assets.xcassets */; };
 		B934F9BD27E69DCA0004A916 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B934F9BB27E69DCA0004A916 /* LaunchScreen.storyboard */; };
+		B934F9C627E69DE10004A916 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B934F9C527E69DE10004A916 /* StoreKit.framework */; };
+		B934F9C827E69E0B0004A916 /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934F9C727E69E0B0004A916 /* IAPHelper.swift */; };
+		B934F9CA27E69E510004A916 /* AnimalsIAPExampleProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934F9C927E69E510004A916 /* AnimalsIAPExampleProducts.swift */; };
+		B934F9CC27E69E5F0004A916 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934F9CB27E69E5F0004A916 /* MasterViewController.swift */; };
+		B934F9CE27E69E6A0004A916 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934F9CD27E69E6A0004A916 /* DetailViewController.swift */; };
+		B934F9D027E69E780004A916 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934F9CF27E69E780004A916 /* ProductCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B934F9AD27E69DC90004A916 /* Animals IAP Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Animals IAP Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B934F9B027E69DC90004A916 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B934F9B227E69DC90004A916 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B934F9B427E69DC90004A916 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B934F9B727E69DC90004A916 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B934F9B927E69DCA0004A916 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B934F9BC27E69DCA0004A916 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B934F9BE27E69DCA0004A916 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B934F9C527E69DE10004A916 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		B934F9C727E69E0B0004A916 /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
+		B934F9C927E69E510004A916 /* AnimalsIAPExampleProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalsIAPExampleProducts.swift; sourceTree = "<group>"; };
+		B934F9CB27E69E5F0004A916 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		B934F9CD27E69E6A0004A916 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		B934F9CF27E69E780004A916 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B934F9C627E69DE10004A916 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +53,7 @@
 			children = (
 				B934F9AF27E69DC90004A916 /* Animals IAP Example */,
 				B934F9AE27E69DC90004A916 /* Products */,
+				B934F9C427E69DE10004A916 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,13 +70,25 @@
 			children = (
 				B934F9B027E69DC90004A916 /* AppDelegate.swift */,
 				B934F9B227E69DC90004A916 /* SceneDelegate.swift */,
-				B934F9B427E69DC90004A916 /* ViewController.swift */,
+				B934F9C727E69E0B0004A916 /* IAPHelper.swift */,
+				B934F9C927E69E510004A916 /* AnimalsIAPExampleProducts.swift */,
+				B934F9CB27E69E5F0004A916 /* MasterViewController.swift */,
+				B934F9CD27E69E6A0004A916 /* DetailViewController.swift */,
+				B934F9CF27E69E780004A916 /* ProductCell.swift */,
 				B934F9B627E69DC90004A916 /* Main.storyboard */,
 				B934F9B927E69DCA0004A916 /* Assets.xcassets */,
 				B934F9BB27E69DCA0004A916 /* LaunchScreen.storyboard */,
 				B934F9BE27E69DCA0004A916 /* Info.plist */,
 			);
 			path = "Animals IAP Example";
+			sourceTree = "<group>";
+		};
+		B934F9C427E69DE10004A916 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B934F9C527E69DE10004A916 /* StoreKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,8 +162,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B934F9B527E69DC90004A916 /* ViewController.swift in Sources */,
+				B934F9CC27E69E5F0004A916 /* MasterViewController.swift in Sources */,
 				B934F9B127E69DC90004A916 /* AppDelegate.swift in Sources */,
+				B934F9CA27E69E510004A916 /* AnimalsIAPExampleProducts.swift in Sources */,
+				B934F9CE27E69E6A0004A916 /* DetailViewController.swift in Sources */,
+				B934F9C827E69E0B0004A916 /* IAPHelper.swift in Sources */,
+				B934F9D027E69E780004A916 /* ProductCell.swift in Sources */,
 				B934F9B327E69DC90004A916 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
