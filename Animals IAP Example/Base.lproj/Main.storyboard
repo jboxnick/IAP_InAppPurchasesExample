@@ -17,22 +17,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="I99-kX-bm5" detailTextLabel="jG2-pX-Xib" style="IBUITableViewCellStyleSubtitle" id="gRS-5z-Q0p">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="I99-kX-bm5" detailTextLabel="jG2-pX-Xib" rowHeight="80" style="IBUITableViewCellStyleSubtitle" id="gRS-5z-Q0p" customClass="ProductCell" customModule="Animals_IAP_Example" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gRS-5z-Q0p" id="zl9-ET-blb">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="I99-kX-bm5">
-                                            <rect key="frame" x="20" y="6" width="25" height="14.5"/>
+                                            <rect key="frame" x="20" y="24" width="25" height="14.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jG2-pX-Xib">
-                                            <rect key="frame" x="20" y="22.5" width="40.5" height="13.5"/>
+                                            <rect key="frame" x="20" y="40.5" width="40.5" height="13.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                             <nil key="textColor"/>
@@ -63,10 +63,24 @@
                     <view key="view" contentMode="scaleToFill" id="HrR-x3-oj0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iIR-28-Lba">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="NGF-ez-N76"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="NGF-ez-N76" firstAttribute="trailing" secondItem="iIR-28-Lba" secondAttribute="trailing" id="TVi-GI-Xtw"/>
+                            <constraint firstItem="iIR-28-Lba" firstAttribute="top" secondItem="NGF-ez-N76" secondAttribute="top" id="b5H-El-TFM"/>
+                            <constraint firstItem="iIR-28-Lba" firstAttribute="leading" secondItem="NGF-ez-N76" secondAttribute="leading" id="gLC-RZ-dSv"/>
+                            <constraint firstItem="NGF-ez-N76" firstAttribute="bottom" secondItem="iIR-28-Lba" secondAttribute="bottom" id="w9K-KJ-9jK"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="GGI-7F-FiX"/>
+                    <connections>
+                        <outlet property="imageView" destination="iIR-28-Lba" id="FnW-hH-QFg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="chr-4f-3Dv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

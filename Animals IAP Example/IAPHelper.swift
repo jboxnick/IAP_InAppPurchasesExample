@@ -10,7 +10,23 @@ import StoreKit
 public typealias ProductIdentifier = String
 public typealias ProductsRequestCompletionHandler = (_ success: Bool, _ products: [SKProduct]?) -> Void
 
-open class IAPHelper: NSObject  {
+
+func resourceNameForProductIdentifier(_ productIdentifier: String) -> String? {
+    return productIdentifier.components(separatedBy: ".").last
+}
+
+
+public struct AnimalsIAPExampleProducts {
+        
+    private static let productIdentifiers: Set<ProductIdentifier> = ["de.JBCodes.Animals_IAP_Example.elefant", "de.JBCodes.Animals_IAP_Example.erdmaennchen", "de.JBCodes.Animals_IAP_Example.giraffe", "de.JBCodes.Animals_IAP_Example.kampffisch", "de.JBCodes.Animals_IAP_Example.koala", "de.JBCodes.Animals_IAP_Example.panda", "de.JBCodes.Animals_IAP_Example.pinguin", "de.JBCodes.Animals_IAP_Example.roter_panda", "de.JBCodes.Animals_IAP_Example.seeloewe", "de.JBCodes.Animals_IAP_Example.tiger", "de.JBCodes.Animals_IAP_Example.wolf"]
+    
+    public static let store = IAPHelper(productIds: AnimalsIAPExampleProducts.productIdentifiers)
+}
+
+
+//MARK: - IAPHelper
+
+open class IAPHelper: NSObject {
     
     //MARK: - Properties
     

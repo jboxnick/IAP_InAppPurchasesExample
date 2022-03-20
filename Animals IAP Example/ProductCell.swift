@@ -10,7 +10,7 @@ import StoreKit
 
 class ProductCell: UITableViewCell {
     
-    //MARK: -
+    //MARK: - Properties
     
     static let priceFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -24,6 +24,7 @@ class ProductCell: UITableViewCell {
     var buyButtonHandler: ((_ product: SKProduct) -> Void)?
     
     var product: SKProduct? {
+        
         didSet {
             guard let product = product else { return }
             
@@ -48,6 +49,8 @@ class ProductCell: UITableViewCell {
         
     }
     
+    //MARK: - View Life Cycle
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         
@@ -55,6 +58,8 @@ class ProductCell: UITableViewCell {
         detailTextLabel?.text = ""
         accessoryView = nil
     }
+    
+    //MARK: - Functions
     
     func newBuyButton() -> UIButton {
         
@@ -66,6 +71,8 @@ class ProductCell: UITableViewCell {
         
         return button
     }
+    
+    //MARK: - @objc Functions
     
     @objc func buyButtonTapped(_ sender: AnyObject) {
         buyButtonHandler?(product!)

@@ -8,37 +8,28 @@
 import UIKit
 import StoreKit
 
-//MARK: - Notification.Name Extension
-
-extension Notification.Name {
-    
-    static let IAPHelperPurchaseNotification = Notification.Name("IAPHelperPurchaseNotification")
-}
-
 class MasterViewController: UITableViewController {
     
     //MARK: - Properties
-  
-  let showDetailSegueIdentifier = "showDetail"
-  
-  var products: [SKProduct] = []
+    
+    let showDetailSegueIdentifier = "showDetail"
+    
+    var products: [SKProduct] = []
     
     //MARK: - View Life Cycle
     
     override func viewDidLoad() {
-      super.viewDidLoad()
+        super.viewDidLoad()
         
         setupViews()
         setupRefreshControl()
         setupNavigation()
         setupNotifications()
+        
+        reload()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-      super.viewDidAppear(animated)
-      
-      reload()
-    }
+    //MARK: - Setup Functions
     
     private func setupViews() {
         
@@ -64,100 +55,117 @@ class MasterViewController: UITableViewController {
                                                name: .IAPHelperPurchaseNotification,
                                                object: nil)
     }
-  
-  override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
     
-    if identifier == showDetailSegueIdentifier {
-      
-      guard let indexPath = tableView.indexPathForSelectedRow else {
-        return false
-      }
-      
-      let product = products[indexPath.row]
-      
-      return AnimalsIAPExampleProducts.store.isProductPurchased(product.productIdentifier)
-    }
+    //MARK: - Navigation
     
-    return true
-  }
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    
-    if segue.identifier == showDetailSegueIdentifier {
-      
-      guard let indexPath = tableView.indexPathForSelectedRow else { return }
-      
-      let product = products[indexPath.row]
-      
-      if let name = resourceNameForProductIdentifier(product.productIdentifier),
-         let detailViewController = segue.destination as? DetailViewController {
-        let image = UIImage(named: name)
-        detailViewController.image = image
-      }
-    }
-  }
-  
-  
-  
-  @objc func reload() {
-    
-    products = []
-    
-    tableView.reloadData()
-   
-      AnimalsIAPExampleProducts.store.requestProducts{ [weak self] success, products in
-        guard let self = self else { return }
-        if success {
-          self.products = products!
-          
-          DispatchQueue.main.async {
-            self.tableView.reloadData()
-          }
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        
+        if identifier == showDetailSegueIdentifier {
+            
+            guard let indexPath = tableView.indexPathForSelectedRow else {
+                return false
+            }
+            
+            let product = products[indexPath.row]
+            
+            return AnimalsIAPExampleProducts.store.isProductPurchased(product.productIdentifier)
         }
+        
+        return true
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == showDetailSegueIdentifier {
+            
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            
+            let product = products[indexPath.row]
+            
+            if let name = resourceNameForProductIdentifier(product.productIdentifier),
+               let detailViewController = segue.destination as? DetailViewController {
+                let image = UIImage(named: name)
+                detailViewController.image = image
+            }
+        }
+    }
+    
+    //MARK: - @objc Functions
+    
+    @objc func reload() {
+        
+        products = []
+        
+        tableView.reloadData()
+        
+        AnimalsIAPExampleProducts.store.requestProducts{ [weak self] success, products in
+            guard let self = self else { return }
+            if success {
+                self.products = products!
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+            DispatchQueue.main.async {
+                self.refreshControl?.endRefreshing()
+            }
+        }
+    }
+    
+    @objc func restoreTapped(_ sender: AnyObject) {
+        
+        AnimalsIAPExampleProducts.store.restorePurchases()
+    }
+    
+    @objc func handlePurchaseNotification(_ notification: Notification) {
+        guard
+            let productID = notification.object as? String,
+            let index = products.firstIndex(where: { product -> Bool in
+                product.productIdentifier == productID
+            })
+        else { return }
+        
         DispatchQueue.main.async {
-          self.refreshControl?.endRefreshing()
+            self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .fade)
         }
-      }
-  }
-  
-  @objc func restoreTapped(_ sender: AnyObject) {
-    
-      AnimalsIAPExampleProducts.store.restorePurchases()
-  }
-  
-  @objc func handlePurchaseNotification(_ notification: Notification) {
-    guard
-      let productID = notification.object as? String,
-      let index = products.firstIndex(where: { product -> Bool in
-        product.productIdentifier == productID
-      })
-    else { return }
-    
-    DispatchQueue.main.async {
-      self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .fade)
     }
-  }
 }
 
-// MARK: - UITableViewDataSource
+//MARK: - UITableViewDataSource + UITableViewDelegate
 
 extension MasterViewController {
-  
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
-    return products.count
-  }
-  
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ProductCell else { return UITableViewCell() }
-    
-    let product = products[indexPath.row]
-    
-    cell.product = product
-    cell.buyButtonHandler = { product in
-        AnimalsIAPExampleProducts.store.buyProduct(product)
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return products.count
     }
-    return cell
-  }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ProductCell else { return UITableViewCell() }
+        
+        let product = products[indexPath.row]
+        
+        cell.product = product
+        cell.buyButtonHandler = { product in
+            AnimalsIAPExampleProducts.store.buyProduct(product)
+        }
+        
+        cell.selectionStyle = .none
+        
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+      
+      return 80
+    }
+}
+
+//MARK: - Notification.Name Extension
+
+extension Notification.Name {
+    
+    static let IAPHelperPurchaseNotification = Notification.Name("IAPHelperPurchaseNotification")
 }
