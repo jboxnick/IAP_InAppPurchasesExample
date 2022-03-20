@@ -17,7 +17,7 @@ func resourceNameForProductIdentifier(_ productIdentifier: String) -> String? {
 
 
 public struct AnimalsIAPExampleProducts {
-        
+    
     private static let productIdentifiers: Set<ProductIdentifier> = ["de.JBCodes.Animals_IAP_Example.elefant", "de.JBCodes.Animals_IAP_Example.erdmaennchen", "de.JBCodes.Animals_IAP_Example.giraffe", "de.JBCodes.Animals_IAP_Example.kampffisch", "de.JBCodes.Animals_IAP_Example.koala", "de.JBCodes.Animals_IAP_Example.panda", "de.JBCodes.Animals_IAP_Example.pinguin", "de.JBCodes.Animals_IAP_Example.roter_panda", "de.JBCodes.Animals_IAP_Example.seeloewe", "de.JBCodes.Animals_IAP_Example.tiger", "de.JBCodes.Animals_IAP_Example.wolf"]
     
     public static let store = IAPHelper(productIds: AnimalsIAPExampleProducts.productIdentifiers)
@@ -62,6 +62,7 @@ open class IAPHelper: NSObject {
 extension IAPHelper {
     
     public func requestProducts(completionHandler: @escaping ProductsRequestCompletionHandler) {
+        
         productsRequest?.cancel()
         productsRequestCompletionHandler = completionHandler
         
@@ -99,6 +100,7 @@ extension IAPHelper {
 extension IAPHelper: SKProductsRequestDelegate {
     
     public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        
         print("Lade Produktliste...")
         let products = response.products
         productsRequestCompletionHandler?(true, products)
@@ -110,6 +112,7 @@ extension IAPHelper: SKProductsRequestDelegate {
     }
     
     public func request(_ request: SKRequest, didFailWithError error: Error) {
+        
         print("Laden der Produktliste fehlgeschlagen.")
         print("Fehler: \(error.localizedDescription)")
         productsRequestCompletionHandler?(false, nil)
@@ -117,6 +120,7 @@ extension IAPHelper: SKProductsRequestDelegate {
     }
     
     private func clearRequestAndHandler() {
+        
         productsRequest = nil
         productsRequestCompletionHandler = nil
     }
@@ -174,6 +178,7 @@ extension IAPHelper: SKPaymentTransactionObserver {
         guard let productIdentifier = transaction.original?.payment.productIdentifier else { return }
         
         print("Kauf wiederherstellen... \(productIdentifier)")
+        
         deliverPurchaseNotificationFor(identifier: productIdentifier)
         
         SKPaymentQueue.default().finishTransaction(transaction)
